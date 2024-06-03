@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Energy</title>
+    <!-- <script src="js/scripts.js" defer></script> -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-bundle.min.js"></script>
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('./img/solar_iot.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cabeca{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .titleCab{
+            display: flex;
+            justify-content: center;
+            font-size: 30px;
+            font-family: 'Times New Roman', Times, serif;
+            width: 50%;
+        }
+
+        label{
+            font-size: 20px;
+            margin: 5px; 
+        }
+
+        h4{
+            font-size: 15px;
+            margin: 5px; 
+        }
+
+        .page{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            min-width: 700px;
+        }
+
+        .graficos{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            min-width: 500px;
+        }
+
+        .medidor{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 40px;
+            margin-bottom: 70px;
+        }
+
+        .cardMedidas{
+            border: 1px solid black;
+            border-radius: 15px;
+            width: 20%;
+            height: 80px;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+            margin: 5px;
+        }
+
+        .titulo{
+            display: flex;
+            border-bottom: 2px solid black ;
+            flex-direction: row;
+            justify-content:space-around;
+            font-size: 25px;
+            height: 30px;
+        }
+
+        .card-body{
+            display: flex;
+            font-size: 30px;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+        }
+
+        .grafico1{
+            display: flex;   
+        }
+
+        @media (max-width: 768px) {
+            .cabeca {
+                padding: 10px;
+            }
+        
+            .titleCab {
+                font-size: 18px;
+                margin-left: 100px;
+            }
+        
+            .tipoenergia,
+            .tipoenergia2 {
+                width: 100%;
+                margin: 20px;
+            }
+        
+            .tituloEnergia {
+                flex-direction: column;
+                align-items: center;
+            }
+        
+            .medidor {
+                margin-bottom: 10px;
+                flex-direction: column;
+                max-width: 90%;
+            }
+    
+            .card-body {
+                font-size: 16px;
+            }
+        }
+
+        .grafico1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="cabeca">
+        <div class="titleCab">
+            <h1 style="justify-content: center;">Medidor de Energia</h1>
+        </div>
+    </div>
+    <div class="page">
+        <div class="medidor">
+            <div class="cardMedidas">
+                <div class="titulo">
+                    <h4>Corrente da Rede</h4>
+                </div>
+                <div class="card-body">
+                <label id="redeamper" class="label"></label><label class="label"> A </label>
+                </div>
+            </div>
+            <div class="cardMedidas">
+                <div class="titulo">
+                    <h4>Tensão da Rede</h4>
+                </div>
+                <div class="card-body">
+                <label id="redevolts" class="label"></label><label class="label"> V </label>
+                </div>
+            </div>   
+            <div class="cardMedidas">
+                <div class="titulo">
+                    <h4>Corrente da Placa </h4>
+                </div>
+                <div class="card-body">
+                <label id="placamper" class="label"></label><label class="label"> A </label>
+                </div>
+            </div>
+            <div class="cardMedidas">
+                <div class="titulo">
+                    <h4>Tensão da Placa</h4>
+                </div>
+                <div class="card-body">
+                <label id="placavolts" class="label"></label><label class="label"> V </label>
+                </div>
+            </div> 
+        </div>
+        <div class="graficos">
+            <div class="grafico1">
+                <div id="chartContainer" style="width: 94%; height: 400px; border: 2px solid black;"></div>
+            </div>
+            <div class="grafico1">
+                <div id="chartContainer1" style="width: 94%; height: 400px; border: 2px solid black;"></div>
+            </div>
+        </div>
+    </div>
+<script>
+    // Configure o Firebase com suas credenciais
+    const firebaseConfig = {
+        apiKey: "AIzaSyCS7vTqiIYfI4EkfDpvNdKSoVDW9tcDsUU",
+        authDomain: "esp-solar.firebaseapp.com",
+        databaseURL: "https://esp-solar-default-rtdb.firebaseio.com",
+        projectId: "esp-solar",
+        storageBucket: "esp-solar.appspot.com",
+        messagingSenderId: "858260283726",
+        appId: "1:858260283726:web:e71a76062fd84edffa3e1f",
+        measurementId: "G-PZ2MRL7J07"
+    };
+    // Inicialize o Firebase
+    firebase.initializeApp(firebaseConfig);
+    // Referência para o nó do banco de dados que você deseja acessar
+    const database = firebase.database();
+    const dataTenCor = database.ref('Tensao_Corrente');
+    
+
+    // Função para exibir os últimos 7 dados do Firebase na página HTML
+    function displayLastSevenData(snapshot) {
+        const redeamper = document.getElementById('redeamper');
+        redeamper.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
+        const redevolts = document.getElementById('redevolts');
+        redevolts.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
+        const placamper = document.getElementById('placamper');
+        placamper.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
+        const placavolts = document.getElementById('placavolts');
+        placavolts.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
+
+        const dataArr = [];
+        snapshot.forEach(childSnapshot => {
+            const data = childSnapshot.val();
+                dataArr.push({ Data: data.Data, CorreRede: data.CorreRede, TensRede: data.TensRede, 
+                    CorrPlaca: data.CorrPlaca, TensPlaca: data.TensPlaca, Status: data.Status });
+        });
+
+
+        // Ordena os dados pela data mais recente
+        dataArr.sort((a, b) => b.Data - a.Data);
+        // Pega apenas os últimos 7 elementos
+        const lastSevenData = dataArr.slice(-1); // Alteração aqui, de -1 para 7
+        // Monta uma string com os últimos 7 dados
+
+        let lastSevenString = "";
+        lastSevenData.forEach(data => {
+            lastSevenString += /*data.Data + ': ' + */ data.CorreRede.toFixed(2) +'\n'; // Altere de acordo com sua estrutura de dados
+        });
+        let lastSevenString1 = "";
+        lastSevenData.forEach(data => {
+            lastSevenString1 += /*data.Data + ': ' + */ data.TensRede.toFixed(2) +'\n'; // Altere de acordo com sua estrutura de dados
+        });
+        let lastSevenString2 = "";
+        lastSevenData.forEach(data => {
+            lastSevenString2 += /*data.Data + ': ' + */ data.CorrPlaca.toFixed(2) +'\n'; // Altere de acordo com sua estrutura de dados
+        });
+        let lastSevenString3 = "";
+        lastSevenData.forEach(data => {
+            lastSevenString3 += /*data.Data + ': ' + */ data.TensPlaca.toFixed(2) +'\n'; // Altere de acordo com sua estrutura de dados
+        });
+        
+        // Adiciona a string com os últimos 7 dados ao elemento redeamper
+        redeamper.textContent = lastSevenString;
+        redevolts.textContent = lastSevenString1;
+        placamper.textContent = lastSevenString2;
+        placavolts.textContent = lastSevenString3;
+    }
+
+
+    // Adicione um listener para atualizar os últimos 7 dados em tempo real
+    dataTenCor.on('value', snapshot => {
+        displayLastSevenData(snapshot);
+    });
+
+
+
+    /// Crie uma instância do gráfico de linha
+    const chart = anychart.line();
+
+    // Defina o título do gráfico
+    chart.title('Tensão e Corrente ao longo do tempo');
+
+    // Adicione os rótulos dos eixos
+    chart.xAxis().title('Data');
+    chart.yAxis().title('Valor');
+
+    // Defina os dados iniciais do gráfico
+    const initialData = [];
+    chart.line(initialData);
+
+    // Adicione uma legenda
+    chart.legend().enabled(true);
+
+    // Personalize o estilo da linha do gráfico para TensPlaca
+    chart.line(1).stroke('#2196F3');
+
+    // Personalize o estilo da linha do gráfico para CorrPlaca
+    chart.line(1).stroke('#FF9800');
+
+    // Adicione o gráfico ao elemento HTML com id "chartContainer"
+    chart.container('chartContainer');
+
+    // Renderize o gráfico
+    chart.draw();
+
+    // Função para atualizar o gráfico com os dados do Firebase
+    function updateChart(snapshot) {
+        const tensDataArr = [];
+        const corrDataArr = [];
+        const snapshotArray = []; // Array temporário para armazenar os dados do snapshot
+
+        snapshot.forEach(childSnapshot => {
+            const data = childSnapshot.val();
+            if (data && typeof data === 'object' && 'Data' in data && 'TensPlaca' in data && 'CorrPlaca' in data) {
+                snapshotArray.push({x: data.Data, tens: data.TensPlaca.toFixed(2), corr: data.CorrPlaca.toFixed(2)});
+            } else {
+                console.error("Dados inválidos:", data);
+            }
+        });
+
+        // Ordena os dados pela data em ordem decrescente
+        snapshotArray.sort((a, b) => b.x - a.x);
+
+        // Pega os cinco últimos dados do snapshotArray
+        const latestData = snapshotArray.slice(-24);
+
+        // Adiciona os cinco últimos dados ao arrays tensDataArr e corrDataArr
+        latestData.forEach(data => {
+            tensDataArr.push({x: data.x, value: data.tens});
+            corrDataArr.push({x: data.x, value: data.corr});
+        });
+
+        // Atualiza os dados no gráfico
+        chart.line(0).data(tensDataArr);
+        chart.line(1).data(corrDataArr);
+    }
+
+    // Adicione um listener para atualizar o gráfico em tempo real
+    dataRef.on('value', snapshot => {
+        updateChart(snapshot);
+    }); 
+
+
+
+</script>
+</body>
+
+</html>
