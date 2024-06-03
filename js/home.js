@@ -28,9 +28,6 @@
         placamper.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
         const placavolts = document.getElementById('placavolts');
         placavolts.innerHTML = ''; // Limpa o conteúdo antes de adicionar novos dados
-        const status = document.getElementById('status');
-        status.innerHTML = 'Disconectado'; // Limpa o conteúdo antes de adicionar novos dados
-
 
         const dataArr = [];
         snapshot.forEach(childSnapshot => {
@@ -38,6 +35,7 @@
                 dataArr.push({ Data: data.Data, CorreRede: data.CorreRede, TensRede: data.TensRede, 
                     CorrPlaca: data.CorrPlaca, TensPlaca: data.TensPlaca, Status: data.Status });
         });
+
 
 
         // Ordena os dados pela data mais recente
@@ -66,23 +64,13 @@
         lastSevenData.forEach(data => {
 
             lastSevenString8 += /*data.Data + ': ' + */ data.Status +'\n'; // Altere de acordo com sua estrutura de dados
-            var paragraphElement = document.querySelector('#status');
-            var colorStatusElement = document.querySelector('.bodyCol');
-
-            if (data.Status === "REDE") {
-            paragraphElement.style.color= 'white';
-            paragraphElement.style.fontSize = '50px';
-            colorStatusElement.style.backgroundColor = 'rgb(30, 115, 241)';
+            if (data.Status == "REDE") {
+                document.getElementById('statusSolar').style.display = 'none';
+                document.getElementById('statusRede').style.display = 'block';
             } 
-            else if (data.Status === "PLACA") {
-            paragraphElement.style.color= 'white';
-            paragraphElement.style.fontSize = '40px';
-            colorStatusElement.style.backgroundColor = 'rgb(5, 196, 47)';
-            }
-            else {
-            statusElement.innerText = "DESLIGADO";
-            paragraphElement.style.color= 'white';
-            colorStatusElement.style.backgroundColor = 'gray';
+            else{
+                document.getElementById('statusRede').style.display = 'none';
+                document.getElementById('statusSolar').style.display = 'block';
             }
         });
         // Adiciona a string com os últimos 7 dados ao elemento redeamper
