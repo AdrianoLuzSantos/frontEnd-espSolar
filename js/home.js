@@ -36,7 +36,7 @@
                     CorrPlaca: data.CorrPlaca, TensPlaca: data.TensPlaca, Status: data.Status });
         });
 
-
+        console.log(dataArr);
 
         // Ordena os dados pela data mais recente
         dataArr.sort((a, b) => b.Data - a.Data);
