@@ -1,0 +1,136 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('./img/solar_iot.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.cabeca{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.titleCab{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    width: 50%;
+}
+
+label{
+    font-size: 20px;
+    margin: 5px; 
+}
+
+h4{
+    font-size: 15px;
+    margin: 5px; 
+}
+
+.page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-width: 700px;
+}
+
+.graficos{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-width: 500px;
+}
+
+.medidor{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 40px;
+    margin-bottom: 70px;
+}
+
+.cardMedidas{
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 20%;
+    height: 80px;  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    margin: 5px;
+}
+
+.titulo{
+    display: flex;
+    border-bottom: 2px solid black ;
+    flex-direction: row;
+    justify-content:space-around;
+    font-size: 25px;
+    height: 30px;
+}
+
+.card-body{
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.grafico1{
+    display: flex;   
+}
+
+@media (max-width: 768px) {
+    .cabeca {
+        padding: 10px;
+    }
+
+    .titleCab {
+        font-size: 18px;
+        margin-left: 100px;
+    }
+
+    .tipoenergia,
+    .tipoenergia2 {
+        width: 100%;
+        margin: 20px;
+    }
+
+    .tituloEnergia {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .medidor {
+        margin-bottom: 10px;
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .card-body {
+        font-size: 16px;
+    }
+}
+
+.grafico1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
