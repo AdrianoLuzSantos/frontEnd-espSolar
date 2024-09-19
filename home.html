@@ -24,88 +24,40 @@
                 <a href="/frontEnd-espSolar/consumo"><div class="consumoMenu"><i class="fa-solid fa-chart-line"></i> Consumo</div></a>
             </div>
             <h1 class="title">Solar IoT</h1>
-            <div id="statusRede" class="cardStatus">
-                <h2> Status </h2>
-                <div class="rede">
-                    <i class="fa-solid fa-plug"></i>
-                    <label for="">Rede</label>
+            <div class="status">
+                <div class="statusconect">
+                    <div id="statusRede" class="cardStatus">
+                        <h2> Status </h2>
+                        <div class="rede">
+                            <i class="fa-solid fa-plug"></i>
+                            <label for="">Rede</label>
+                        </div>
+                    </div>
+                    <div id="statusSolar">
+                        <h2> Status </h2>
+                        <div class="rede">
+                            <i class="fa-solid fa-solar-panel"></i>
+                            <label for="">Solar</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div id="statusSolar">
-                <h2> Status </h2>
-                <div class="rede">
-                    <i class="fa-solid fa-solar-panel"></i>
-                    <label for="">Solar</label>
+                <div class="statusbat">
+                    <div class="cardInfo">
+                        <div class="cardTitle">
+                            <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-sharp fa-solid fa-car-battery"></i></div>
+                            <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
+                                <h4>Tensão Bateria</h4>
+                            </div>
+                            <div style="display: flex; flex: 1; justify-content: right" id="dataBat"></div>
+                        </div>
+                        <div class="cardBody">
+                        <label id="tensBate" class="label">0</label><label class="label"> V </label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="bodyMed">
-                <div class="medidaRede">
-                    <div class="tituloRede">
-                        <div class="iconTitle"> <i class="fa-solid fa-plug"></i></div>
-                        <div class="labelTitle"> <label style="align-items: center;">Energia Rede</label></div>
-                        <div style="display: flex; flex: 1;"></div>
-                    </div>
-                    <div class="info">
-                        <div class="cardInfo">
-                            <div class="cardTitle">
-                                <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
-                                <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Corrente</h4>
-                                </div>
-                                <div style="display: flex; flex: 1;"></div>
-                            </div>
-                            <div class="cardBody">
-                            <label id="redeamper" class="label">0</label><label class="label"> A </label>
-                            </div>
-                        </div>
-                        <div class="cardInfo">
-                            <div class="cardTitle">
-                                <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
-                                <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Tensão</h4>
-                                </div>
-                                <div style="display: flex; flex: 1;"></div>
-                            </div>
-                            <div class="cardBody">
-                            <label id="redevolts" class="label">0</label><label class="label"> V </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info">
-                        <div class="cardInfo">
-                            <div class="cardTitle">
-                                <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
-                                <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Consumo</h4>
-                                    <h4>Diário</h4>
-                                </div>
-                                <div style="display: flex; flex: 1;"></div>
-                            </div>
-                            <div class="cardBody">
-                            <label id="consDiaRede" class="label">0</label><label class="label"> kWh</label>
-                            </div>
-                        </div>
-                        <div class="cardInfo">
-                            <div class="cardTitle">
-                                <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
-                                <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Consumo</h4>
-                                    <h4>Mensal</h4>
-                                </div>
-                                <div style="display: flex; flex: 1;"></div>
-                            </div>
-                            <div class="cardBody">
-                            <label id="consMesRede" class="label"></label><label class="label"> kWh</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="medidaSolar">
-                    <div class="tituloSolar">
-                        <div class="iconTitle"><i class="fa-solid fa-solar-panel"></i></div>
-                        <div class="labelTitle"><label style="align-items: center;">Energia Solar</label></div>
-                        <div style="display: flex; flex: 1;"></div>
-                    </div>
                     <div class="info">
                         <div class="cardInfo">
                             <div class="cardTitle">
@@ -113,7 +65,7 @@
                                 <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
                                     <h4>Corrente</h4>
                                 </div>
-                                <div style="display: flex; flex: 1;"></div>
+                                <div style="display: flex; flex: 1; justify-content: right" id="dataCorre"></div>
                             </div>
                             <div class="cardBody">
                             <label id="placamper" class="label">0</label><label class="label"> A </label>
@@ -125,7 +77,7 @@
                                 <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
                                     <h4>Tensão</h4>
                                 </div>
-                                <div style="display: flex; flex: 1;"></div>
+                                <div style="display: flex; flex: 1; justify-content: right" id="dataTens"></div>
                             </div>
                             <div class="cardBody">
                             <label id="placavolts" class="label">0</label><label class="label"> V </label>
@@ -137,28 +89,28 @@
                             <div class="cardTitle">
                                 <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
                                 <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Consumo</h4>
-                                    <h4>Diário</h4>
+                                    <h4>Consumo Diário</h4>
                                 </div>
-                                <div style="display: flex; flex: 1;"></div>
+                                <div style="display: flex; flex: 1; justify-content: right" id="dataConsDia"></div>
                             </div>
                             <div class="cardBody">
-                            <label id="consDiaPlaca" class="label">0</label><label class="label"> kWh </label>
+                            <label id="consDiaPlaca" class="label">0</label><label class="label"> Wh </label>
                             </div>
                         </div>
+            <!---
                         <div class="cardInfo">
                             <div class="cardTitle">
                                 <div style="display: flex; flex: 1; justify-content: center;"><i class="fa-solid fa-bolt"></i></div>
                                 <div style="display: flex; flex:2; flex-direction: column; text-align: center;">
-                                    <h4>Consumo</h4>
-                                    <h4>Mensal</h4>
+                                    <h4>Consumo Mensal</h4>
                                 </div>
-                                <div style="display: flex; flex: 1;"></div>
-                            </div>
+                                <div style="display: flex; flex: 1; justify-content: right" id="dataConsMes"></div>
+                            </div> 
                             <div class="cardBody">
                             <label id="consMesPlaca" class="label">0</label><label class="label"> kWh </label>
                             </div>
                         </div>
+            --->
                     </div>
                 </div>
             </div>

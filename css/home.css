@@ -8,7 +8,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 255, 0, 0.295);
+    background-color: rgba(193, 194, 193, 0.295);
 }
 .container{
     display: flex;
@@ -93,8 +93,8 @@ a{
     border-radius: 10px;
     box-shadow: 0px 5px 5px #b3b3b3;
     background-color: #ffffff;
-    color: rgb(115, 196, 119);
-    width: 10%; 
+    color: rgb(247, 94, 33);
+    width: 20%; 
 }
 #statusSolar{
     display: none;
@@ -106,8 +106,8 @@ a{
     border-radius: 10px;
     box-shadow: 0px 5px 5px #b3b3b3;
     background-color: #ffffff;
-    color: rgb(115, 196, 119);
-    width: 10%; 
+    color: rgb(63, 168, 49);
+    width: 20%; 
 }
 h2{
     text-align: center;
@@ -158,8 +158,9 @@ h2{
     box-shadow: 0px 5px 5px #b3b3b3;
     background-color: #ffffff;
     padding: 15px;
-    width: 25%;
+    width: 50%;
     height: 250px;
+    margin: 30px;
 }
 .tituloSolar{
     display: flex;
@@ -198,10 +199,10 @@ h2{
     flex-direction: column;
     border: 1px solid brgb(115, 196, 119);
     border-radius: 10px;
-    background-color:  rgb(115, 196, 119);
+    background-color:  rgb(121, 121, 121);
     color: #ffffff;
     padding: 10px;
-    width: 120px;
+    width: 30%;
 }
 .cardTitle{
     display: flex;
@@ -215,4 +216,30 @@ h2{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 50px;
+    
 }
+label{
+    font-size: 22px;
+    margin: 5px; 
+}
+.status{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+.statusconect{
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    align-items: end;
+}
+.statusbat{
+    font-family: "Outfit", sans-serif;
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    justify-content: end;
+}
+

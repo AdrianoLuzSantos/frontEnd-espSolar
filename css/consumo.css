@@ -8,7 +8,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 255, 0, 0.295);
+    background-color: rgba(197, 199, 197, 0.295);
 }
 .container{
     display: flex;
@@ -91,13 +91,31 @@ a{
     background-color: #ffffff;
     border-radius: 10px;
     padding: 10px;
-    width: 70%;
+    width: 90%;
+    margin: 20px;
+}
+.graficobar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    margin: 20px;
 }
 .titleGraf{
     font-family: "Outfit", sans-serif;
-    color: rgb(115, 196, 119);
+    color: rgb(63, 168, 49);
     margin-bottom: 5px;
 }
 #chart{
+    width: 100%;
+}
+#chartPotDia{
+    width: 100%;
+}
+#chartPotMes{
     width: 100%;
 }
